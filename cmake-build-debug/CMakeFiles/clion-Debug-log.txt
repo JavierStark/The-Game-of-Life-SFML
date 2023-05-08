@@ -1,0 +1,5 @@
+G:\Programacion\JetBrains\apps\CLion\ch-0\231.8770.66\bin\cmake\win\x64\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=G:/Programacion/JetBrains/apps/CLion/ch-0/231.8770.66/bin/ninja/win/x64/ninja.exe -G Ninja -S G:\Programacion\C++\Simulation -B G:\Programacion\C++\Simulation\cmake-build-debug
+-- Found SFML 2.5.1 in C:/MinGW/lib/cmake/SFML
+-- Configuring done
+-- Generating done
+-- Build files have been written to: G:/Programacion/C++/Simulation/cmake-build-debug
