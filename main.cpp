@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-#define CELL 15
+#define CELL 10
 
 using namespace sf;
 using namespace std;
@@ -17,8 +17,8 @@ vector<vector<bool>> checkRules(vector<vector<bool>> grid);
 
 
 int main() {
-    RenderWindow window(VideoMode(CELL * 100, CELL * 60), "Test");
-    window.setFramerateLimit(10);
+    RenderWindow window(VideoMode(CELL * 150, CELL * 100), "Test");
+    window.setFramerateLimit(20);
 
     bool pause = true;
 

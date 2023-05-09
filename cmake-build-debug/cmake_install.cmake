@@ -1,8 +1,8 @@
-# Install script for directory: G:/Programacion/C++/Simulation
+# Install script for directory: G:/Programacion/C++/TheGameOfLife
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/Simulation")
+  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/TheGameOfLife")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "G:/Programacion/C++/Simulation/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "G:/Programacion/C++/TheGameOfLife/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
