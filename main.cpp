@@ -7,9 +7,9 @@
 using namespace sf;
 using namespace std;
 
-void resetGrid(vector<vector<bool>> &grid);
+void resetGrid(vector<vector<bool>> *grid);
 
-void initialState(vector<vector<bool>> &grid, int fraction);
+void initialState(vector<vector<bool>> *grid, int fraction);
 
 void drawCell(RenderWindow &window, int x, int y);
 
@@ -17,13 +17,13 @@ vector<vector<bool>> checkRules(vector<vector<bool>> grid);
 
 
 int main() {
-    RenderWindow window(VideoMode(CELL * 150, CELL * 100), "Test");
+    RenderWindow window(VideoMode(CELL * 150, CELL * 100), "The Game Of Life", Style::None);
     window.setFramerateLimit(20);
 
     bool pause = true;
 
     vector<vector<bool>> cells(window.getSize().x / CELL, vector<bool>(window.getSize().y / CELL));
-    resetGrid(cells);
+    resetGrid(&cells);
 
     while (window.isOpen()) {
         Vector2i globalPosition = Mouse::getPosition();
@@ -44,23 +44,23 @@ int main() {
                     pause = !pause;
                 }
                 if (event.key.code == Keyboard::BackSpace) {
-                    resetGrid(cells);
+                    resetGrid(&cells);
                 }
 
                 if (event.key.code == Keyboard::Num2) {
-                    initialState(cells, 2);
+                    initialState(&cells, 2);
                 }
                 if (event.key.code == Keyboard::Num3) {
-                    initialState(cells, 3);
+                    initialState(&cells, 3);
                 }
                 if (event.key.code == Keyboard::Num4) {
-                    initialState(cells, 4);
+                    initialState(&cells, 4);
                 }
                 if (event.key.code == Keyboard::Num5) {
-                    initialState(cells, 5);
+                    initialState(&cells, 5);
                 }
                 if (event.key.code == Keyboard::Num6) {
-                    initialState(cells, 6);
+                    initialState(&cells, 6);
                 }
             }
         }
@@ -86,17 +86,16 @@ int main() {
     }
 }
 
-void resetGrid(vector<vector<bool>> &grid) {
-    for (auto &column: grid) {
+void resetGrid(vector<vector<bool>> *grid) {
+    for (auto &column: *grid) {
         fill(column.begin(), column.end(), false);
     }
 }
 
-void initialState(vector<vector<bool>> &grid, int fraction) {
-    for (int i = 0; i < grid.size(); i++) {
-        for (int j = 0; j < grid.size(); j++) {
-            if (rand() % fraction == 0) grid[i][j] = true;
-            else grid[i][j] = false;
+void initialState(vector<vector<bool>> *grid, int fraction) {
+    for (auto &column: *grid) {
+        for (auto cell: column) {
+            cell = (rand() % fraction == 0);
         }
     }
 }
