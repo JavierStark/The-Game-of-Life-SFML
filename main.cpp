@@ -13,7 +13,7 @@ void initialState(vector<vector<bool>> *grid, int fraction);
 
 void drawCell(RenderWindow &window, int x, int y);
 
-vector<vector<bool>> checkRules(vector<vector<bool>> grid);
+void checkRules(vector<vector<bool>> &grid, vector<vector<bool>> &gridInBackground);
 
 
 int main() {
@@ -23,7 +23,9 @@ int main() {
     bool pause = true;
 
     vector<vector<bool>> cells(window.getSize().x / CELL, vector<bool>(window.getSize().y / CELL));
+    vector<vector<bool>> cellsChanging(window.getSize().x / CELL, vector<bool>(window.getSize().y / CELL));
     resetGrid(&cells);
+    resetGrid(&cellsChanging);
 
     while (window.isOpen()) {
         Vector2i globalPosition = Mouse::getPosition();
@@ -70,7 +72,7 @@ int main() {
         window.clear(pause ? pauseColor : Color::Black);
 
 
-        if (!pause) cells = checkRules(cells);
+        if (!pause) checkRules(cells, cellsChanging);
 
 
         for (int i = 0; i < cells.size(); i++) {
@@ -106,15 +108,12 @@ void drawCell(RenderWindow &window, int x, int y) {
     window.draw(r);
 }
 
-vector<vector<bool>> checkRules(vector<vector<bool>> grid) {
+void checkRules(vector<vector<bool>> &grid, vector<vector<bool>> &gridInBackground) {
     int xSize = grid.size();
     int ySize = grid[0].size();
 
 
-    vector<vector<bool>> newGrid(xSize, vector<bool>(ySize));
-    for (int i = 0; i < xSize; i++) {
-        fill(newGrid[i].begin(), newGrid[i].end(), false);
-    }
+    resetGrid(&gridInBackground);
 
 
     for (int x = 0; x < xSize; x++) {
@@ -136,20 +135,20 @@ vector<vector<bool>> checkRules(vector<vector<bool>> grid) {
 
 
             if (!current && nActive == 3) {
-                newGrid[x][y] = true;
+                gridInBackground[x][y] = true;
             }
 
             if (current) {
                 if (nActive <= 1 || nActive >= 4) {
-                    newGrid[x][y] = false;
+                    gridInBackground[x][y] = false;
                 } else {
-                    newGrid[x][y] = true;
+                    gridInBackground[x][y] = true;
                 }
             }
         }
     }
 
-    return newGrid;
+    grid = gridInBackground;
 }
 
 
